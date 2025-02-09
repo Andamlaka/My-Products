@@ -11,7 +11,7 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
   const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
 
-  // Fetch product data
+  
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -26,17 +26,17 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
     fetchProduct();
   }, [params.id]);
 
-  // Handle error state
+  
   if (error) {
     return <p className="text-red-500">{error}</p>;
   }
 
-  // Show loading state until product is available
+
   if (!product) {
     return <p>Loading...</p>;
   }
 
-  // Handle adding to cart
+  
   const handleAddToCart = () => {
     dispatch(
       addToCart({

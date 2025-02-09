@@ -26,11 +26,25 @@ interface CartItem {
           removeFromCart:(state,{payload}:PayloadAction<number>) => {
             state.items = state.items.filter(({id}) => id !== payload);
           },
+          incrementQuantity: (state, { payload }: PayloadAction<number>) => {
+            const item = state.items.find(({ id }) => id === payload);
+            if (item) item.quantity++;
+          },
+          decrementQuantity: (state, { payload }: PayloadAction<number>) => {
+            const item = state.items.find(({ id }) => id === payload);
+            if (item) {
+              if (item.quantity > 1) {
+                item.quantity--;
+              } else {
+                state.items = state.items.filter(({ id }) => id !== payload);
+              }
+            }
+          },
           clearCart:(state) => {
             state.items = [];
           },
     },
   });
 
-  export const {addToCart, removeFromCart, clearCart} = cartSlice.actions;
+  export const {addToCart, removeFromCart, incrementQuantity,decrementQuantity, clearCart} = cartSlice.actions;
   export default cartSlice.reducer;
