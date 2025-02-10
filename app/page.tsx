@@ -31,8 +31,9 @@ export default async function Home() {
           </Link>
           <h1 className="text-lg font-semibold mt-2">{product.title}</h1>
           <p className="text-green-600 font-bold">${product.price}</p>
-          <Link href={`/products/${product.id}`}>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+          <Link href={`/products/${product.id}`} className='mt-auto'>
+            <button className="bg-blue-500 hover:bg-blue-700
+             text-white font-bold py-2 px-4 rounded w-full">
               View Details
             </button>
           </Link>
