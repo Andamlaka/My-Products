@@ -1,42 +1,50 @@
-'use client';
+"use client";
 
-import axios from 'axios';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../store/storeSlice';
+import axios from "axios";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/storeSlice";
+import { useParams } from "next/navigation";
 
-export default function ProductDetails({ params }: { params: { id: string } }) {
-  const [product, setProduct] = useState<any>(null);
+type Product = {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  image: string;
+};
+
+export default function ProductDetails() {
+  const { id } = useParams();
+  const [product, setProduct] = useState<Product | null>(null);
   const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
 
-  
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`https://fakestoreapi.com/products/${params.id}`);
+        const response = await axios.get<Product>(`https://fakestoreapi.com/products/${id}`);
         setProduct(response.data);
       } catch (err) {
-        console.error('Error fetching product:', err);
-        setError('Failed to load product details.');
+        console.error("Error fetching product:", err);
+        setError("Failed to load product details.");
       }
     };
 
-    fetchProduct();
-  }, [params.id]);
+    if (id) {
+      fetchProduct();
+    }
+  }, [id]);
 
-  
   if (error) {
     return <p className="text-red-500">{error}</p>;
   }
-
 
   if (!product) {
     return <p>Loading...</p>;
   }
 
-  
   const handleAddToCart = () => {
     dispatch(
       addToCart({

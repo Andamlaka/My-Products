@@ -1,7 +1,7 @@
 "use client";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/store";
-import { removeFromCart, incrementQuantity, decrementQuantity, clearCart } from "../store/storeSlice";
+import { removeFromCart, incrementQuantity, decrementQuantity} from "../store/storeSlice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
