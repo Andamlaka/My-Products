@@ -50,7 +50,7 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
   };
 
   return (
-    <div className="container mx-auto p-4 flex flex-col md:flex-row gap-8">
+    <div className="container mx-auto p-4 flex flex-col lg:flex-row gap-8">
       <Image
         src={product.image}
         alt={product.title}
